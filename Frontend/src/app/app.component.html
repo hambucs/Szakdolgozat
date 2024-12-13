@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autókölcsönző - Az Ön prémium autókölcsönző szolgáltatása</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo"><a href="/home">Autókölcsönző</a></div>
+            <ul class="nav-links">
+                <li><a href="home">Kezdőlap</a></li>
+                <li><a href="cars">Autók</a></li>
+                <li><a href="about">Rólunk</a></li>
+                <li *ngIf="username"><a href="car-upload">Feltöltés</a></li> 
+                <li *ngIf="username"><a class="nav-button" (click)="logOut()">Kijelentkezés</a></li> 
+                <li *ngIf="!username"><a href="login" class="nav-button">Bejelentkezés</a></li> 
+                <li *ngIf="!username"><a href="register" class="nav-button">Regisztráció</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        
+
+       
+           <router-outlet></router-outlet>
+        
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2024 Autókölcsönző. Minden jog fenntartva.</p>
+        </div>
+    </footer>
+</body>
+</html>

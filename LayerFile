@@ -1,0 +1,34 @@
+# Base Image
+FROM vm/ubuntu:18.04
+
+# Install Node.js and Angular CLI
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash && \
+    apt-get install --no-install-recommends gcc g++ make nodejs && \
+    rm -f /etc/apt/sources.list.d/nodesource.list && \
+    npm install -g @angular/cli
+
+# Install .NET SDK
+RUN wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+    dpkg -i packages-microsoft-prod.deb && \
+    apt-get update && \
+    apt-get install -y apt-transport-https && \
+    apt-get install -y dotnet-sdk-6.0  # Adjust based on your .NET version
+
+# Copy the entire repository
+COPY . .
+
+# Install dependencies for Angular
+WORKDIR /Frontend
+RUN npm install
+RUN ng build --optimization=false
+
+# Serve Angular in the background
+RUN BACKGROUND ng serve --host 0.0.0.0 --disable-host-check
+
+# Set up and run the backend
+WORKDIR /Backend
+RUN dotnet restore
+RUN BACKGROUND dotnet run
+# Expose ports
+EXPOSE WEBSITE http://localhost:4200  # Angular
+EXPOSE WEBSITE http://localhost:5062  # Backend (adjust if needed)

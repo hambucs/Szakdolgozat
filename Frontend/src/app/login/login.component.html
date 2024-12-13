@@ -1,0 +1,41 @@
+<div class="login-container">
+  <h2 class="login-title">Bejelentkezés</h2>
+
+  <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="login-form">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        class="form-control"
+        [(ngModel)]="user.email"
+        name="email"
+        required
+        placeholder="Adja meg az email címét"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Jelszó</label>
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        [(ngModel)]="user.password"
+        name="password"
+        required
+        placeholder="Adja meg a jelszavát"
+      />
+    </div>
+
+    <p *ngIf="message" class="error-message">{{ message }}</p>
+
+    <button type="submit" [disabled]="isLoading" class="btn btn-primary">
+      {{ isLoading ? 'Bejelentkezés...' : 'Bejelentkezés' }}
+    </button>
+  </form>
+
+  <div class="register-link">
+    <p>Nincsen fiókja? <a href="/register">Regisztráljon itt.</a></p>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+
+<form (ngSubmit)="onRegister()" #registerForm="ngForm" class="register-form">
+  <h2 class="register-title">Regisztráció</h2>
+ 
+  <div class="form-group">
+    <label for="username">Felhasználónév</label>
+    <input
+      type="text"
+      id="username"
+      [(ngModel)]="user.username"
+      name="username"
+      required
+      placeholder="Adja meg a felhasználónevét"
+      class="form-control"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+      type="email"
+      id="email"
+      [(ngModel)]="user.email"
+      name="email"
+      required
+      placeholder="Adja meg az email címét"
+      class="form-control"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="password">Jelszó</label>
+    <input
+      type="password"
+      id="password"
+      [(ngModel)]="user.PasswordHash"
+      name="password"
+      required
+      placeholder="Adja meg a jelszavát"
+      class="form-control"
+    />
+  </div>
+
+  <button type="submit" [disabled]=" isLoading" class="btn btn-primary">
+    {{ isLoading ? 'Regisztrálás folyamatban...' : 'Regisztrálás' }}
+  </button>
+
+  <p *ngIf="message" class="error-message">{{ message }}</p>
+</form>

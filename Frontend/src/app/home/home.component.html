@@ -1,0 +1,37 @@
+<div class="fullpage">
+<section class="hero" id="home">
+    <div *ngIf="username">
+        <h2>Üdvözöllek, {{ username }}!</h2>
+      </div>
+      <div *ngIf="!username">
+        <h2>Nincs bejelentkezve.</h2>
+      </div>
+    <p>Tapasztalja meg a nyílt utak szabadságát prémium autókölcsönző szolgáltatásunkkal!</p>
+    <a href="/cars" class="btn">Foglaljon Most</a>
+</section>
+
+
+
+<section class="benefits" id="about">
+<div class="container">
+    <h2>Miért válasszon minket?</h2>
+    <div class="benefits-grid">
+        <div class="benefit-item">
+            <i>🚗</i>
+            <h3>Széles Választék</h3>
+            <p>Válasszon igényeinek megfelelő járművek széles kínálatából</p>
+        </div>
+        <div class="benefit-item">
+            <i>💰</i>
+            <h3>Legjobb Árak</h3>
+            <p>A piacon fellelhető legkedvezőbb árak</p>
+        </div>
+        <div class="benefit-item">
+            <i>🛠️</i>
+            <h3>Napi 24 órás elérhetőség</h3>
+            <p>Kérdéseivel és problémáival bátran forduljon hozzánk Facebookon.</p>
+        </div>
+    </div>
+</div>
+</section>
+</div>

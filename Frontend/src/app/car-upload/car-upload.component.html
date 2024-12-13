@@ -1,0 +1,65 @@
+<div class="container">
+  <h2>Autó feltöltése</h2>
+
+  <form (ngSubmit)="onUploadCar(carForm)" #carForm="ngForm">
+    <div class="form-group">
+      <label for="make">Márka:</label>
+      <input type="text" id="make" class="form-control" [(ngModel)]="car.make" name="make" required placeholder="Márka">
+    </div>
+
+    <div class="form-group">
+      <label for="model">Típus:</label>
+      <input type="text" id="model" class="form-control" [(ngModel)]="car.model" name="model" required placeholder="Típus">
+    </div>
+
+    <div class="form-group">
+      <label for="year">Évjárat:</label>
+      <input type="number" id="year" class="form-control" [(ngModel)]="car.year" name="year" required min="1886" max="2024" placeholder="Évjárat">
+    </div>
+
+    <div class="form-group">
+      <label for="dailyRate">Napi ár:</label>
+      <input type="number" id="dailyRate" class="form-control" [(ngModel)]="car.dailyRate" name="dailyRate" required min="5000" placeholder="Napi ár">
+    </div>
+
+    <div class="form-group">
+      <label for="availableFrom">Mettől elérhető:</label>
+      <input type="date" id="availableFrom" class="form-control" [(ngModel)]="car.availableFrom" name="availableFrom" required>
+    </div>
+
+    <div class="form-group">
+      <label for="availableTo">Meddig elérhető:</label>
+      <input type="date" id="availableTo" class="form-control" [(ngModel)]="car.availableTo" name="availableTo" required>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Kép:</label>
+      <input type="file" id="image" class="form-control" name="image" (change)="onFileSelected($event)" required>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Leírás:</label>
+      <textarea id="description" class="form-control" [(ngModel)]="car.description" name="description" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="location">Helyszín:</label>
+      <input type="text" id="location" class="form-control" [(ngModel)]="car.location" name="location" required>
+    </div>
+
+    <div class="form-group">
+      <label for="mileage">Kilóméteróra:</label>
+      <input type="number" id="mileage" class="form-control" [(ngModel)]="car.mileage" name="mileage" required>
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!carForm.valid">Autó feltöltése</button>
+  </form>
+</div>

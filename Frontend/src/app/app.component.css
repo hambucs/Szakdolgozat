@@ -1,0 +1,29 @@
+.nav-button:hover{
+    cursor:pointer;
+
+
+}
+#contact{
+  position: sticky;
+  bottom: 0;
+  height:80px;
+  width: 100%;
+  text-align: center;
+  position:fixed;
+}
+#contact>*{
+    margin-top:13px ;
+
+}
+.logo>*{
+  text-decoration:none;
+  color:white;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  list-style: none;
+}
+
+

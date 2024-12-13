@@ -1,0 +1,86 @@
+<div class="car-list-container">
+    <h1>Elérhető autók</h1>
+  
+    <div *ngIf="isLoading" class="loading">
+        <p>Autók betöltése...</p>
+    </div>
+  
+    <div *ngIf="!isLoading && cars.length === 0" class="no-cars">
+        <p>Jelenleg nincsen elérhető autó.</p>
+    </div>
+  
+    <div *ngIf="!isLoading && cars.length > 0" class="cars-grid">
+        <div *ngFor="let car of cars" class="car-card">
+            <a *ngIf="car.image" (click)="openImage(car)">
+                <img
+                    [src]="'data:image/jpeg;base64,' + car.image"
+                    alt="{{ car.make }} {{ car.model }}"
+                    class="car-image"
+                />
+            </a>
+            <a *ngIf="!car.image" (click)="openImage(car)">
+                <img
+                    src="assets/default-car-image.jpg"
+                    alt="Default Car Image"
+                    class="car-image"
+                />
+            </a>
+            <h2>{{ car.make }} {{ car.model }}</h2>
+            <p><strong>Évjárat:</strong> {{ car.year }}</p>
+            <p><strong>Helyszín:</strong> {{ car.location || 'Nincs megadva' }}</p>
+            <p><strong>Napi ár:</strong> {{ car.dailyRate }} FT</p>
+            <p class="car-description"><strong>Leírás:</strong> {{ car.description || 'No description available' }}</p>
+            <button class="rent-button" (click)="openDateModal(car)">
+              <h5>Kölcsönzés</h5>
+            </button>
+        </div>
+    </div>
+  </div>
+  
+  <div *ngIf="isDateModalOpen" class="date-modal" >
+    <div class="booking-modal-content">
+      <span class="close" (click)="closeDateModal()">&times;</span>
+      <br>
+      <br>
+   
+      <div class="rent">
+        <h2>Kölcsönzés</h2>
+        <h2>{{ selectedCar?.make }} {{ selectedCar?.model }}</h2>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Válaszd ki mettől:</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="availableFrom"
+            [matDatepickerFilter]="isDateDisabled"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        
+      </div>
+  
+      <div>
+        <mat-form-field>
+          <mat-label>Válaszd ki meddig:</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            [(ngModel)]="availableTo"
+            [matDatepickerFilter]="isDateDisabled"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+  
+      <button class="confirm-button" (click)="createReservation()">Kölcsönzés megerősítése</button>
+    </div>
+  </div>
+  
+ 
+  <div *ngIf="isImageOpen" class="image-modal" (click)="closeImage()">
+    <img [src]="selectedImage" class="modal-image" />
+  </div>
